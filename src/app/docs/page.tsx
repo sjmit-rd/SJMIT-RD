@@ -8,7 +8,7 @@ import { ProtectedRoute } from '@/shared/components/ProtectedRoute';
 
 export default function DocsPage() {
   return (
-    <ProtectedRoute requireAdmin>
+    <ProtectedRoute>
       <PageContainer>
         <PageHeader
           title={<>Admin Portal <span className="text-gradient">Guide</span></>}
