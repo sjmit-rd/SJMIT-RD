@@ -134,7 +134,7 @@ function LoginForm() {
                   type="email"
                   required
                   className="w-full bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded-xl px-12 py-3 text-slate-950 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-start/50 focus:border-brand-start transition-all"
-                  placeholder="admin@sjmit.ac.in"
+                  placeholder="rnd@sjmit.ac.in"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />

@@ -13,9 +13,6 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// A list of hardcoded admin emails for simple role management.
-// In a production app, this would ideally be managed via Firebase Custom Claims.
-const ADMIN_EMAILS = ['shreyasb19386@gmail.com'];
 const SESSION_TIMEOUT_MS = 60 * 60 * 1000; // 1 hour
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -27,11 +24,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const handleSignOut = useCallback(async (isTimeout = false) => {
     if (!auth) return;
     if (logoutTimer.current) {
-        clearTimeout(logoutTimer.current);
+      clearTimeout(logoutTimer.current);
     }
     await signOut(auth);
     if (isTimeout) {
-        router.push('/login?reason=session_expired');
+      router.push('/login?reason=session_expired');
     }
   }, [router]);
 
@@ -47,34 +44,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (user) {
-        const activityEvents = ['mousemove', 'keydown', 'mousedown', 'touchstart', 'scroll'];
-        
-        const resetTimer = () => {
-            resetSessionTimeout();
-        };
+      const activityEvents = ['mousemove', 'keydown', 'mousedown', 'touchstart', 'scroll'];
 
-        activityEvents.forEach(event => {
-            window.addEventListener(event, resetTimer);
-        });
-        
+      const resetTimer = () => {
         resetSessionTimeout();
+      };
 
-        return () => {
-            if (logoutTimer.current) {
-                clearTimeout(logoutTimer.current);
-            }
-            activityEvents.forEach(event => {
-                window.removeEventListener(event, resetTimer);
-            });
-        };
+      activityEvents.forEach(event => {
+        window.addEventListener(event, resetTimer);
+      });
+
+      resetSessionTimeout();
+
+      return () => {
+        if (logoutTimer.current) {
+          clearTimeout(logoutTimer.current);
+        }
+        activityEvents.forEach(event => {
+          window.removeEventListener(event, resetTimer);
+        });
+      };
     }
   }, [user, resetSessionTimeout]);
 
   useEffect(() => {
     if (!auth) {
-        console.error("Firebase Auth is not initialized.");
-        setLoading(false);
-        return;
+      console.error("Firebase Auth is not initialized.");
+      setLoading(false);
+      return;
     }
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       setUser(firebaseUser); // Simply set the user from Firebase
@@ -85,7 +82,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => unsubscribe();
   }, []);
 
-  const isAdmin = !!user && ADMIN_EMAILS.includes(user.email || '');
+  // Accounts are manually provisioned in the Firebase Console (no public signup),
+  // so any authenticated Firebase user is an administrator.
+  const isAdmin = !!user;
 
   const logout = async () => {
     await handleSignOut(false);

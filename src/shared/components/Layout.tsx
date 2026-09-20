@@ -51,7 +51,7 @@ function ProfileMenu() {
         <button className="rounded-full focus:outline-none focus:ring-2 focus:ring-brand-start focus:ring-offset-2 focus:ring-offset-background dark:focus:ring-offset-[#0a0c10] transition-transform hover:scale-110 active:scale-100">
           <Avatar className="h-11 w-11 border-2 border-transparent group-hover:border-brand-start transition-colors">
             {user.photoURL ? (
-               <AvatarImage src={user.photoURL} alt={user.displayName || 'User'} />
+              <AvatarImage src={user.photoURL} alt={user.displayName || 'User'} />
             ) : (
               <AvatarFallback className="bg-slate-200 dark:bg-white/10 font-bold text-lg text-slate-600 dark:text-slate-300">{userInitial}</AvatarFallback>
             )}
@@ -61,9 +61,9 @@ function ProfileMenu() {
       <DropdownMenuContent align="end" className="w-auto min-w-[280px] max-w-sm p-2 mt-2">
         <DropdownMenuLabel className='font-normal p-3'>
           <div className="flex items-center gap-3">
-             <Avatar className="h-10 w-10 flex-shrink-0">
-                {user.photoURL ? <AvatarImage src={user.photoURL} alt={user.displayName || 'User'} /> : <AvatarFallback>{userInitial}</AvatarFallback>}
-             </Avatar>
+            <Avatar className="h-10 w-10 flex-shrink-0">
+              {user.photoURL ? <AvatarImage src={user.photoURL} alt={user.displayName || 'User'} /> : <AvatarFallback>{userInitial}</AvatarFallback>}
+            </Avatar>
             <div className="flex flex-col space-y-1 min-w-0 flex-1">
               <p className="text-sm font-bold leading-tight text-slate-900 dark:text-white break-all">{user.displayName || user.email}</p>
               <p className="text-xs leading-none text-slate-500 dark:text-slate-400">
@@ -110,7 +110,7 @@ export function Navbar() {
     { name: 'Facilities', href: '/admin?tab=facility', icon: Building2, tab: 'facility' },
     { name: 'Services', href: '/admin?tab=service', icon: Activity, tab: 'service' },
   ];
-  
+
   const isViewingAdmin = pathname.startsWith('/admin');
 
   return (
@@ -118,18 +118,18 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-full">
         {/* Logo */}
         <div className="flex items-center">
-            <Link href="/" className="flex items-center group">
-              <img src="https://sjmit.ac.in/wp-content/themes/sjmit/img/sjmit-logo.png" alt="SJMIT Logo" className="h-12 w-12 object-contain group-hover:scale-110 transition-transform" />
-            </Link>
+          <Link href="/" className="flex items-center group">
+            <img src="https://sjmit.ac.in/wp-content/themes/sjmit/img/sjmit-logo.png" alt="SJMIT Logo" className="h-12 w-12 object-contain group-hover:scale-110 transition-transform" />
+          </Link>
         </div>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center justify-center p-1.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-full">
           {(isViewingAdmin && isAdmin ? adminNavItems : navItems).map((item) => {
-            const isActive = isViewingAdmin 
-              ? activeAdminTab === (item as typeof adminNavItems[0]).tab 
+            const isActive = isViewingAdmin
+              ? activeAdminTab === (item as typeof adminNavItems[0]).tab
               : pathname === item.href;
-            
+
             return (
               <Link
                 key={item.name}
@@ -158,70 +158,70 @@ export function Navbar() {
           {/* Mobile Controls */}
           <div className="flex items-center gap-2 md:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
-                <SheetTrigger asChild>
-                    <button
-                        className="inline-flex items-center justify-center p-2.5 rounded-full text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 focus:outline-none transition-colors"
-                        aria-label="Open menu"
-                    >
-                        <Menu className="h-5 w-5" />
-                    </button>
-                </SheetTrigger>
-                <SheetContent side="left" className="w-[300px] p-0 border-r-0 bg-white/80 dark:bg-[#0a0c10]/80 backdrop-blur-xl">
-                    <SheetTitle className="sr-only">Main Menu</SheetTitle>
-                    <div className="p-6 pt-12 h-full overflow-y-auto">
-                        <div className="flex items-center mb-10">
-                          <img src="https://sjmit.ac.in/wp-content/themes/sjmit/img/sjmit-logo.png" alt="SJMIT Logo" className="h-12 w-12 object-contain" />
-                        </div>
-                        <div className="space-y-2">
-                        {navItems.map((item) => (
-                            <Link
-                                key={item.name}
-                                href={item.href}
-                                onClick={() => setIsOpen(false)}
-                                className={cn(
-                                    'block px-4 py-3 rounded-xl text-base font-bold flex items-center space-x-3',
-                                    pathname === item.href && !isViewingAdmin
-                                    ? 'bg-slate-100 dark:bg-white/10 text-slate-900 dark:text-brand-start'
-                                    : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-950 dark:hover:text-white'
-                                )}
-                            >
-                                <item.icon className="h-5 w-5" />
-                                <span>{item.name}</span>
-                            </Link>
-                          )
+              <SheetTrigger asChild>
+                <button
+                  className="inline-flex items-center justify-center p-2.5 rounded-full text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 focus:outline-none transition-colors"
+                  aria-label="Open menu"
+                >
+                  <Menu className="h-5 w-5" />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[300px] p-0 border-r-0 bg-white/80 dark:bg-[#0a0c10]/80 backdrop-blur-xl">
+                <SheetTitle className="sr-only">Main Menu</SheetTitle>
+                <div className="p-6 pt-12 h-full overflow-y-auto">
+                  <div className="flex items-center mb-10">
+                    <img src="https://sjmit.ac.in/wp-content/themes/sjmit/img/sjmit-logo.png" alt="SJMIT Logo" className="h-12 w-12 object-contain" />
+                  </div>
+                  <div className="space-y-2">
+                    {navItems.map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        onClick={() => setIsOpen(false)}
+                        className={cn(
+                          'block px-4 py-3 rounded-xl text-base font-bold flex items-center space-x-3',
+                          pathname === item.href && !isViewingAdmin
+                            ? 'bg-slate-100 dark:bg-white/10 text-slate-900 dark:text-brand-start'
+                            : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-950 dark:hover:text-white'
                         )}
-                        </div>
-                        {!loading && isAdmin && (
-                          <div className="mt-8 pt-6 border-t border-slate-200 dark:border-white/10">
-                            <p className="px-4 mb-2 text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 tracking-wider">Admin</p>
-                            <div className="space-y-1">
-                              {adminNavItems.map((item) => (
-                                <Link
-                                  key={item.name}
-                                  href={item.href}
-                                  onClick={() => setIsOpen(false)}
-                                  className={cn(
-                                    'block px-4 py-3 rounded-xl text-base font-bold flex items-center space-x-3',
-                                    isViewingAdmin && activeAdminTab === item.tab
-                                      ? 'bg-slate-100 dark:bg-white/10 text-slate-900 dark:text-brand-start'
-                                      : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-950 dark:hover:text-white'
-                                  )}
-                                >
-                                  <item.icon className="h-5 w-5" />
-                                  <span>{item.name}</span>
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                        <div className="mt-8 pt-6 border-t border-slate-200 dark:border-white/10 sm:hidden">
-                          <p className="px-4 mb-3 text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 tracking-wider">Appearance</p>
-                          <div className="px-4">
-                            <ThemeSwitcher />
-                          </div>
-                        </div>
+                      >
+                        <item.icon className="h-5 w-5" />
+                        <span>{item.name}</span>
+                      </Link>
+                    )
+                    )}
+                  </div>
+                  {!loading && isAdmin && (
+                    <div className="mt-8 pt-6 border-t border-slate-200 dark:border-white/10">
+                      <p className="px-4 mb-2 text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 tracking-wider">Admin</p>
+                      <div className="space-y-1">
+                        {adminNavItems.map((item) => (
+                          <Link
+                            key={item.name}
+                            href={item.href}
+                            onClick={() => setIsOpen(false)}
+                            className={cn(
+                              'block px-4 py-3 rounded-xl text-base font-bold flex items-center space-x-3',
+                              isViewingAdmin && activeAdminTab === item.tab
+                                ? 'bg-slate-100 dark:bg-white/10 text-slate-900 dark:text-brand-start'
+                                : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-950 dark:hover:text-white'
+                            )}
+                          >
+                            <item.icon className="h-5 w-5" />
+                            <span>{item.name}</span>
+                          </Link>
+                        ))}
+                      </div>
                     </div>
-                </SheetContent>
+                  )}
+                  <div className="mt-8 pt-6 border-t border-slate-200 dark:border-white/10 sm:hidden">
+                    <p className="px-4 mb-3 text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 tracking-wider">Appearance</p>
+                    <div className="px-4">
+                      <ThemeSwitcher />
+                    </div>
+                  </div>
+                </div>
+              </SheetContent>
             </Sheet>
           </div>
         </div>
@@ -243,17 +243,17 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-start space-x-4 mb-6">
-               <img src="https://sjmit.ac.in/wp-content/themes/sjmit/img/sjmit-logo.png" alt="SJMIT Logo" className="h-16 w-16 object-contain flex-shrink-0" />
-               <div>
-                  <h3 className="font-bold text-lg text-slate-900 dark:text-white tracking-tight">S J M Vidyapeetha's</h3>
-                  <h2 className="font-bold text-2xl text-slate-900 dark:text-white tracking-tight leading-tight">SJM INSTITUTE OF TECHNOLOGY</h2>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">(Recognised by AICTE, New Delhi & Affiliated to Visvesvaraya Technological University, Belagavi)</p>
-               </div>
+              <img src="https://sjmit.ac.in/wp-content/themes/sjmit/img/sjmit-logo.png" alt="SJMIT Logo" className="h-16 w-16 object-contain flex-shrink-0" />
+              <div>
+                <h3 className="font-bold text-lg text-slate-900 dark:text-white tracking-tight">S J M Vidyapeetha's</h3>
+                <h2 className="font-bold text-2xl text-slate-900 dark:text-white tracking-tight leading-tight">SJM INSTITUTE OF TECHNOLOGY</h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">(Recognised by AICTE, New Delhi & Affiliated to Visvesvaraya Technological University, Belagavi)</p>
+              </div>
             </div>
             <address className="text-sm leading-relaxed font-medium not-italic">
               NH-4 Bypass, P.B No:73, Chitradurga - 577502, Karnataka State, India.
               <br />
-              <a href="mailto:research@sjmit.ac.in" className="text-slate-950 dark:text-slate-100 font-bold hover:text-brand-start transition-colors">research@sjmit.ac.in</a>
+              <a href="mailto:rnd@sjmit.ac.in" className="text-slate-950 dark:text-slate-100 font-bold hover:text-brand-start transition-colors">rnd@sjmit.ac.in</a>
             </address>
           </div>
           <div>
